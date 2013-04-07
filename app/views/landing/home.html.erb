@@ -1,0 +1,16 @@
+<h1>Meet Me Maybe</h1>
+
+<% if current_user %>
+	<%= link_to "logout", destroy_user_session_path, :method => :delete %>
+
+	<h2>Friend Requests</h2>
+	<ul>
+	<% @friend_requests.each do |request| %>
+		<li><%= request.from.user_name %></li>
+	<% end %>
+	</ul>
+
+<% else %>
+	<%= link_to "register", new_user_registration_path %>
+	<%= link_to "login", new_user_session_path %>
+<% end %>
