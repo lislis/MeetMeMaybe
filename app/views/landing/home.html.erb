@@ -6,8 +6,30 @@
 	<h2>Friend Requests</h2>
 	<ul>
 	<% @friend_requests.each do |request| %>
-		<li><%= request.from.user_name %></li>
+		<li>
+			<%= request.from.user_name %>
+		</li>
+		<li><%= form_for request do |f| %> <!-- #we editing the request, its like editing the account, to get --> 
+			<div><%= f.hidden_field :state, :value => "accepted" %></div>
+			<div><%= f.submit "accept" %></div> <!--  -->
+		<% end %>
+		</li>
+		<li>
+		<%= form_for request do |f| %>  
+			<div><%= f.hidden_field :state, :value => "ignored" %></div>
+			<div><%= f.submit "ignore" %></div> <!-- ignore the request -->
+		<% end %>
+		</li>
 	<% end %>
+	
+	</ul>
+	<h2>Friends</h2>
+	<ul>
+		<% @friends.each do |friend| %>
+		<li>
+			<%= link_to friend.full_name, profile_path(friend.user_name)%> <!-- for every frien show the name that links to the profile -->
+		</li>
+		<% end %>
 	</ul>
 
 <% else %>
